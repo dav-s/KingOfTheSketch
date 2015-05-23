@@ -33,6 +33,6 @@ $(document).ready(function(){
     if(name.length==0){
         //window.location="index.html";
     }
-    $("body").append("<h1>"+name+"</h1>");
+    
     socket.emit("connect name", name);
 });
