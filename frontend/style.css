@@ -5,6 +5,7 @@
 
 }
 #player2{
+
 	width: 400px;
 	height: 400px;
 	float: right;
@@ -18,4 +19,13 @@
 }
 #vs-title i{
 	color: #CC9900;
+}
+
+#votingApparatus{
+	float: left;
+	padding-top: 100px;
+	width: 100px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
 }
