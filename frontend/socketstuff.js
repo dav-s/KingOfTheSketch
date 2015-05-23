@@ -33,6 +33,10 @@ socket.on("update ui", function(data){
     $("#peasvote-count").html(data["peasvotes"]);
 });
 
+socket.on("need wait", function(time){
+    setStatusBox("You need to wait "+(5-time/1000)+" seconds before voting again!","warning")
+});
+
 
 $(document).ready(function(){
     name = getParameterByName("name");
