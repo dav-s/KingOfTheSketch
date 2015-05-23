@@ -16,3 +16,8 @@
 #vs-title i{
 	color: #CC9900;
 }
+.square {
+	width: 850px;
+	height: 650px;
+	background:  grey;
+}
