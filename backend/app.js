@@ -1,6 +1,6 @@
 var app = require('http');
 var io = require('socket.io')(5000);
-
+io.set('origins', "*");
 // id -> json
 var users = {};
 
