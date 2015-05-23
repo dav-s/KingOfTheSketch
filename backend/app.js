@@ -84,10 +84,10 @@ function waitedTime(sid){
         return true;
     }
     if((curtime-lastvotetime)/1000<=seconds_to_wait){
-        return true;
+        return false;
     }
 
-    return false;
+    return true;
 }
 
 function updateUI(){
