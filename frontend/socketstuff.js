@@ -8,6 +8,10 @@ function getParameterByName(name) {
     return results === null ? "" : decodeURIComponent(results[1].replace(/\+/g, " "));
 }
 
+function setStatusBox(message, type){
+    $("#status-box").html("<div class='alert alert-"+type+"'>"+message+"</div>");
+}
+
 var name = "";
 
 socket.on('connect', function () {
@@ -15,9 +19,15 @@ socket.on('connect', function () {
 });
 
 socket.on("name taken", function(){
-    $("body").append("<h1>That name has already been taken</h1>" +
-    "<h2>Go back <a href='index.html'>home</a>.</h2>");
+    setStatusBox("That name has already been taken.", "danger");
 });
+
+socket.on("name success", function(){
+    setStatusBox("Successfully connected.", "success");
+
+    $("#status-box").append("<h1>Successfully connected.</h1>");
+});
+
 
 $(document).ready(function(){
     name = getParameterByName("name");
