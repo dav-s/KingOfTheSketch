@@ -1,6 +1,4 @@
-var app = require('http');
 var io = require('socket.io')(5000);
-io.set('origins', "*");
 // id -> json
 var users = {};
 
@@ -21,6 +19,7 @@ io.on("connection", function(socket){
     socket.on("connect name", function (name) {
         if(geIDrFromName(name)==null){
             users[socket.id]= {name:name};
+            socket.emit("name success");
         }else{
             socket.emit("name taken");
         }
