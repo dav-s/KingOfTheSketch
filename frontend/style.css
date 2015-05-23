@@ -1,31 +1,42 @@
-#player1{
+#player1-section{
 	width: 400px;
 	height: 400px;
 	float: left;
 
 }
-#player2{
+#p1{
+	width: 400px;
+	height: 400px;
+}
+#player2-section{
 
 	width: 400px;
 	height: 400px;
 	float: right;
 
 }
+#p2{
+	width: 400px;
+	height: 400px;
+}
+
+
+#player1-section i{
+	text-align: center;
+	color: #CC9900;
+	font-size: 30px;
+}
+
 .clear{
 	clear: both;
 }
-#vs-title{
-	margin-left: auto;
-	margin-right: auto;
-	text-align: center;
-	font-family: sans-serif;
-	font-size: 24px;
-	width: 400px;
-}
-#vs-title i{
-	color: #CC9900;
-}
 
+.title{
+	text-align: center;
+	font-size: 18px;
+	
+	font-weight: 600;
+}
 #votingApparatus{
 	float: left;
 	padding-top: 100px;
@@ -35,7 +46,6 @@
 	text-align: center;
 }
 #logged-in-as{
-	
 	text-align: right;
-	width: 100px;
+	padding-right: 15px;
 }

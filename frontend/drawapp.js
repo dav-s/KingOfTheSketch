@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    var p1 = new DrawingBoard.Board('player1',{
+    var p1 = new DrawingBoard.Board('p1',{
 		controls: [
 		'Size',
 		'Color'
@@ -8,7 +8,7 @@ $(document).ready(function() {
 	controlsPosition: 'top right'
     });
 
-    var p2 = new DrawingBoard.Board('player2',{
+    var p2 = new DrawingBoard.Board('p2',{
 		controls: [
 		'Color',
 		'Size'
