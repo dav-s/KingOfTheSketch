@@ -29,6 +29,9 @@ io.on("connection", function(socket){
         if(geIDrFromName(name)==null){
             users[socket.id]= {name:name};
             socket.emit("name success");
+            if(gamegoing){
+                socket.emit("game start");
+            }
         }else{
             socket.emit("name taken");
         }
@@ -67,6 +70,7 @@ io.on("connection", function(socket){
             starttime=Date.now();
             kingvotes=0;
             peasvotes=0;
+            io.emit("game start");
             updateUI();
         }
     });

@@ -14,6 +14,7 @@ function setStatusBox(message, type){
 
 var name = "";
 
+
 socket.on('connect', function () {
     console.log("dank");
 });
@@ -24,6 +25,12 @@ socket.on("name taken", function(){
 
 socket.on("name success", function(){
     setStatusBox("Successfully connected.", "success");
+    $("#username-holder").html(name);
+});
+
+socket.on("update ui", function(data){
+    $("#kingvote-count").html(data["kingvotes"]);
+    $("#peasvote-count").html(data["peasvotes"]);
 });
 
 
@@ -35,4 +42,11 @@ $(document).ready(function(){
     }
     
     socket.emit("connect name", name);
+
+    $("#kingvote-button").click(function(){
+        socket.emit("vote king");
+    });
+    $("#peasvote-button").click(function(){
+        socket.emit("vote peas");
+    });
 });
