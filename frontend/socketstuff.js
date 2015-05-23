@@ -9,7 +9,7 @@ function getParameterByName(name) {
 }
 
 function setStatusBox(message, type){
-    $("#status-box").html("<div class='alert alert-"+type+"'>"+message+"</div>");
+    $("#status-box").html("<div class='alert alert-"+type+" alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+message+"</div>");
 }
 
 var name = "";
@@ -24,8 +24,6 @@ socket.on("name taken", function(){
 
 socket.on("name success", function(){
     setStatusBox("Successfully connected.", "success");
-
-    $("#status-box").append("<h1>Successfully connected.</h1>");
 });
 
 
