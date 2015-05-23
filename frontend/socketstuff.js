@@ -1,3 +1,12 @@
-/**
- * Created by davis on 5/23/15.
- */
+var socket = io('http://localhost:5000');
+
+$(document).ready(function(){
+
+});
+
+
+socket.on('connect', function () {
+        console.log("dank");
+    }
+);
+
