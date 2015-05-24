@@ -80,12 +80,13 @@ io.on("connection", function(socket){
 
     socket.on("king draw", function(pic){
         kingpic = pic;
-        socket.to('others').emit("king update", kingpic);
-        //io.emit("king update", kingpic);
+        //socket.to('others').emit("king update", kingpic);
+        io.emit("king update", kingpic);
     });
     socket.on("peas draw", function(pic){
         peaspic = pic;
-        socket.to('others').emit("peas update", peaspic);
+        //socket.to('others').emit("peas update", peaspic);
+        io.emit("peas update", peaspic);
     });
 
 });
