@@ -8,8 +8,8 @@ var users = {};
 var kingvotes= 0, peasvotes= 0;
 var kingid, peasid;
 
-var kingpic = {};
-var peaspic = {};
+var kingpic = [];
+var peaspic = [];
 
 var starttime;
 var gamegoing=false;
@@ -78,8 +78,14 @@ io.on("connection", function(socket){
         }
     });
 
-    socket.on("king draw", function(data){
-
+    socket.on("king draw", function(pic){
+        kingpic = pic;
+        socket.to('others').emit("king update", kingpic);
+        //io.emit("king update", kingpic);
+    });
+    socket.on("peas draw", function(pic){
+        peaspic = pic;
+        socket.to('others').emit("peas update", peaspic);
     });
 
 });

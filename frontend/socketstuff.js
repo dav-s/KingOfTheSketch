@@ -13,6 +13,8 @@ function setStatusBox(message, type){
 }
 
 var name = "";
+var isKing = false;
+var isPeas = false;
 
 
 socket.on('connect', function () {
