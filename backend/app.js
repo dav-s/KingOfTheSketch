@@ -33,6 +33,8 @@ io.on("connection", function(socket){
             users[socket.id]= {name:name};
             socket.emit("name success");
             if(gamegoing){
+                io.emit("king update", kingpic);
+                io.emit("peas update", kingpic);
                 socket.emit("game start");
             }
         }else{
