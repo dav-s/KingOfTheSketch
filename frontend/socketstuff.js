@@ -130,6 +130,11 @@ socket.on("game start", function(top){
 socket.on("game end", function(){
     $("#sbutton").show();
     timer.stop();
+    timer.updateTime({
+        "start":timer.sTime,
+        "current":timer.sTime+timer.duration,
+        "duration": timer.duration/1000
+    });
     gamegoing=false;
     setStatusBox("The game has ended! "+userqueue[0].name+" is victorious!", "success");
 });
@@ -144,7 +149,7 @@ $(document).ready(function(){
     }else{
         socket.emit("connect name", name);
         timer = new Timer($("#timer"), 0, function(){
-            socket.emit("end game");
+            //socket.emit("end game");
         });
     }
     

@@ -109,9 +109,10 @@ io.on("connection", function(socket){
             io.emit("game start", curtopic);
             updateTimer();
             updateUI();
+            setTimeout(endgame,seconds_duration*1000);
         }
     });
-    socket.on("end game", function(){
+    function endgame(){
         if(gamegoing){
             gamegoing=false;
             if(peasvotes>kingvotes){//peaswins
@@ -157,7 +158,7 @@ io.on("connection", function(socket){
             updateQueue();
             io.emit("game end");
         }
-    });
+    }
 
     socket.on("king draw", function(pic){
         kingpic = pic;
