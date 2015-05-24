@@ -51,6 +51,8 @@ socket.on("update queue", function(queuelist){
         html+="<tr><td>"+(i+1)+"</td><td>"+userqueue[i]["name"]+"</td></tr>";
     }
     $("#queue-table").html(html);
+    $("#king-name").html(userqueue[0].name);
+    $("#peasant-name").html(userqueue[1]!=null ? userqueue[1].name : "NONE");
 });
 
 
