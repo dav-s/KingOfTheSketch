@@ -103,6 +103,12 @@
 .center{
 	text-align: center;
 }
+.pad{
+	padding-top: 2%;
+}
+.pad-bot{
+	padding-bottom: 1%;
+}
 .leaderboards{
 	padding-left: 15%;
 	padding-right: 15%;
