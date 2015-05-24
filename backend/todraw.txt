@@ -2,9 +2,26 @@ Mona Lisa
 Statue of Liberty
 CodeDay
 The Meaning of Life
-This Game
-Python
 Memes
 GitHub
 Favorite Food
 Best Video Game
+Cars
+School Supplies
+Social Media Logos
+7 Wonders of the World
+American History
+Science
+Popular Soft Drinks
+Candy
+Fast Food
+Movies
+Architecture
+Fruit
+Vegetables
+Mammals
+Reptiles
+Disney Characters
+The Beach
+The Jungle
+The Desert
