@@ -47,8 +47,15 @@ socket.on("need wait", function(time){
 socket.on("update queue", function(queuelist){
     userqueue=queuelist;
     var html = '<tr><th>Position</th><th>Username</th></tr>';
-    for(var i = 0; i<userqueue.length; i++){
-        html+="<tr><td>"+(i+1)+"</td><td>"+userqueue[i]["name"]+"</td></tr>";
+    html += "<tr style='background-color: gold'><td>" + 1 + "</td><td>" + userqueue[0]["name"] + "</td></tr>";
+    html += "<tr style='background-color: lightcoral'><td>" + 2 + "</td><td>" + userqueue[1]["name"] + "</td></tr>";
+
+    for(var i = 2; i<userqueue.length; i++){
+        if(name==userqueue[i]["name"]){
+            html += "<tr style='background-color: lightgreen'><td>" + (i + 1) + "</td><td>" + userqueue[i]["name"] + "</td></tr>";
+        }else {
+            html += "<tr ><td>" + (i + 1) + "</td><td>" + userqueue[i]["name"] + "</td></tr>";
+        }
     }
     $("#queue-table").html(html);
     $("#king-name").html(userqueue[0].name);
@@ -61,9 +68,10 @@ $(document).ready(function(){
     console.log(name);
     if(name.length==0){
         //window.location="index.html";
+    }else{
+        socket.emit("connect name", name);
     }
     
-    socket.emit("connect name", name);
 
     $("#kingvote-button").click(function(){
         socket.emit("vote king");
