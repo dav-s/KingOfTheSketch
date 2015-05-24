@@ -172,7 +172,7 @@ io.on("connection", function(socket){
                 amt_won=1;
                 addToConsecBoardIfNotExist(last_winner, amt_won);
             }
-            leaderjson.sort(function(a, b){
+            longestleaderjson.sort(function(a, b){
                 if(a.wins> b.wins){
                     return -1;
                 }if(a.wins < b.wins){

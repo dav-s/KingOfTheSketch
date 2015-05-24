@@ -12,12 +12,18 @@ $(document).ready(function() {
     $("#b3").click(function(){
     	hideTabs();
     	$("#leaderboard-section").show();
-		$.get("leaderboard.json", function(data){
+		$.get("mostleader.json", function(data){
+			var html = "<tr><th>Position</th><th>Name</th><th>Wins</th></tr>";
+			$.each(data, function(index, val){
+				html+="<tr class ='info'><td>"+(index+1)+"</td><td>"+val.name+"</td><td>"+val.wins+"</td></tr>";
+			});
+			$("#most-leader-table").html(html);
+		});$.get("longestleader.json", function(data){
 			var html = "<tr><th>Position</th><th>Name</th><th>Wins</th></tr>";
 			$.each(data, function(index, val){
 				html+="<tr class ='success'><td>"+(index+1)+"</td><td>"+val.name+"</td><td>"+val.wins+"</td></tr>";
 			});
-			$("#leader-table").html(html);
+			$("#longest-leader-table").html(html);
 		});
 
     });
