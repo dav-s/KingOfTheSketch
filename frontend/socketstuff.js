@@ -136,7 +136,7 @@ socket.on("game end", function(){
         "duration": timer.duration/1000
     });
     gamegoing=false;
-    setStatusBox("The game has ended! "+userqueue[0].name+" is victorious!", "success");
+    setStatusBox("The game has ended! <h3 style='display: inline-block'>"+userqueue[0].name+"</h3> is victorious!", "success");
 });
 
 $(document).ready(function(){
