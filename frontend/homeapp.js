@@ -1,5 +1,6 @@
 $(document).ready(function() {
     hideTabs();
+    $("#play-now").show();
     $("#b1").click(function(){
     	hideTabs();
     	$("#play-now").show();
