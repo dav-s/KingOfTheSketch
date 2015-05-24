@@ -213,6 +213,9 @@ io.on("connection", function(socket){
 });
 
 function waitedTime(sid){
+    if(users[sid]==null){
+        return false;
+    }
     var lastvotetime = users[sid]["lastvotetime"];
     var curtime = Date.now();
     if(lastvotetime==null){
