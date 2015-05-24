@@ -12,7 +12,7 @@ var kingpic = [];
 var peaspic = [];
 
 var starttime;
-var gamegoing=false;
+var gamegoing=true;
 
 function geIDrFromName(name){
     var keys = Object.keys(users);
