@@ -167,7 +167,9 @@ io.on("connection", function(socket){
                 amt_won++;
                 addToConsecBoardIfNotExist(last_winner, amt_won);
             }else{
-                addToConsecBoardIfNotExist(last_winner, amt_won);
+                if(last_winner!=null){
+                    addToConsecBoardIfNotExist(last_winner, amt_won);
+                }
                 last_winner=winname;
                 amt_won=1;
                 addToConsecBoardIfNotExist(last_winner, amt_won);
@@ -253,6 +255,8 @@ function addToConsecBoardIfNotExist(name, wins){
     var madechange = false;
     for(var i=0; i<longestleaderjson.length; i++){
         if(name == longestleaderjson[i].name){
+            //console.log(name);
+            //console.log(longestleaderjson[i]);
             if(longestleaderjson[i].wins<wins){
                 longestleaderjson[i].wins=wins;
             }
