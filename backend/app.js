@@ -33,8 +33,9 @@ io.on("connection", function(socket){
             users[socket.id]= {name:name};
             socket.emit("name success");
             if(gamegoing){
-                io.emit("king update", kingpic);
-                io.emit("peas update", peaspic);
+                socket.emit("king update", kingpic);
+                socket.emit("peas update", peaspic);
+                socket.emit("update ui", getGameState());
                 socket.emit("game start");
             }
         }else{
