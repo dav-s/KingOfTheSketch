@@ -3,9 +3,10 @@ var fs = require('fs');
 // id -> json
 
 var topicarray = fs.readFileSync(__dirname+"/todraw.txt").toString().split('\n');
-console.log(topicarray);
+var leaderjson = JSON.parse(fs.readFileSync(__dirname+"/../frontend/leaderboard.json").toString());
+//console.log(topicarray);
 var seconds_to_wait = 5;
-var seconds_duration = 90;
+var seconds_duration = 20;
 
 var users = {};
 
@@ -129,6 +130,30 @@ io.on("connection", function(socket){
                 queuedusers.splice(1,1);
                 queuedusers.push(tuser);
             }
+            var winname = users[queuedusers[0]].name;
+            var madechange=false;
+            for(var i=0; i<leaderjson.length; i++){
+                var c = leaderjson[i];
+                if(c.name==winname){
+                    c["wins"]++;
+                    madechange=true;
+                    break;
+                }
+            }
+            if(!madechange){
+                leaderjson.push({"name": winname, "wins": 1});
+            }
+            leaderjson.sort(function(a, b){
+                if(a.wins> b.wins){
+                    return 1;
+                }if(a.wins < b.wins){
+                    return -1;
+                }
+                return 0;
+            });
+            fs.writeFile(__dirname+"/../frontend/leaderboard.json", JSON.stringify(leaderjson), function(err){
+                console.log(err);
+            });
             updateQueue();
             io.emit("game end");
         }
