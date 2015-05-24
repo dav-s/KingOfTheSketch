@@ -106,13 +106,17 @@ function EditableCanvas(id, type){
     });
     function addClick(x, y)
     {
-        addpoint(lines[linenum], x, y);
+        if(getRemainingInk(type)>0) {
+            addpoint(lines[linenum], x, y);
+        }
     }
     function redraw(){
         //console.log("beer");
         if(useable){
             //console.log("here");
-            socket.emit(type+" draw", lines);
+            if(getRemainingInk(type)>0) {
+                socket.emit(type + " draw", lines);
+            }
         }
         context.clearRect(0, 0, context.canvas.width, context.canvas.height); // Clears the canvas
         linesRedraw(context, lines);

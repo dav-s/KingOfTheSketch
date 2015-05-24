@@ -13,15 +13,24 @@ function setStatusBox(message, type){
     $("#status-box").html("<div class='alert alert-"+type+" alert-dismissible'><button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>"+message+"</div>");
 }
 
+var maxink=500;
+
 var name = "";
-var isKing = false;
-var isPeas = false;
 var kingvotes=0;
 var peasvotes=0;
+var kingink=0;
+var $kinginkbar=null;
+var $peasinkbar=null;
+var peasink=0;
 var userqueue = [];
 var timer = null;
 var kingcanv = null;
 var peascanv = null;
+var gamegoing=false;
+
+function getRemainingInk(type){
+    return maxink-(eval(type+"ink")-eval(type+"votes")*10);
+}
 
 socket.on('connect', function () {
     console.log("dank");
@@ -41,35 +50,25 @@ socket.on("update ui", function(data){
     $("#peasvote-count").html(data["peasvotes"]);
     kingvotes=data["kingvotes"];
     peasvotes=data["peasvotes"];
+    $kinginkbar.css("width", getRemainingInk("king")/maxink*100+"%");
+    $peasinkbar.css("width", getRemainingInk("peas")/maxink*100+"%");
 });
 
 socket.on("need wait", function(time){
     setStatusBox("You need to wait "+(5-time/1000)+" seconds before voting again!","warning")
 });
 
+socket.on("update timer", function(t){
+    timer.updateTime(t);
+});
+
 socket.on("update queue", function(queuelist){
     userqueue=queuelist;
-    if(userqueue[0]["name"]==name && !isKing){
-        if(isPeas){
-            peascanv=new UneditableCanvas("peascanv");
-            createCanvas("p2", "peascanv");
+    if(userqueue.length>=2 && !gamegoing){
+        $("#sbutton").show();
+    }else{
+        $("#sbutton").hide();
 
-        }
-        createCanvas("p1", "kingcanv");
-
-        kingcanv = new EditableCanvas("kingcanv", "king");
-        isPeas=false;
-        isKing=true;
-    }if(userqueue[1]!=null && userqueue[1]["name"]==name && !isPeas){
-        if(isKing){
-            createCanvas("p1", "kingcanv");
-            peascanv=new UneditableCanvas("kingcanv");
-        }
-        createCanvas("p2", "peascanv");
-
-        kingcanv = new EditableCanvas("peascanv", "peas");
-        isPeas=true;
-        isKing=false;
     }
     var html = '<tr><th>Position</th><th>Username</th></tr>';
     html += "<tr style='background-color: gold'><td>" + 1 + "</td><td>" + userqueue[0]["name"] + "</td></tr>";
@@ -88,8 +87,46 @@ socket.on("update queue", function(queuelist){
     $("#peasant-name").html(userqueue[1]!=null ? userqueue[1].name : "NONE");
 });
 
+socket.on("enable king", function(){
+    createCanvas("p2", "peascanv");
+    createCanvas("p1", "kingcanv");
+    peascanv = new UneditableCanvas("peascanv");
+    kingcanv = new EditableCanvas("kingcanv", "king");
+});socket.on("enable peas", function(){
+    createCanvas("p2", "peascanv");
+    createCanvas("p1", "kingcanv");
+    kingcanv = new UneditableCanvas("kingcanv");
+    peascanv = new EditableCanvas("peascanv", "peas");
+});socket.on("disable all", function(){
+    createCanvas("p2", "peascanv");
+    createCanvas("p1", "kingcanv");
+    kingcanv = new UneditableCanvas("kingcanv");
+    peascanv = new UneditableCanvas("peascanv");
+});
+
+socket.on("king ink", function(ink){
+    kingink=ink;
+    $kinginkbar.css("width", getRemainingInk("king")/maxink*100+"%");
+});socket.on("peas ink", function(ink){
+    peasink=ink;
+    $peasinkbar.css("width", getRemainingInk("peas")/maxink*100+"%");
+});
+
+socket.on("game start", function(){
+    $("#sbutton").hide();
+    timer.initiate();
+    setStatusBox("Game started!", "success");
+});
+
+socket.on("game end", function(){
+    $("#sbutton").show();
+    timer.stop();
+    setStatusBox("The game has ended", "error");
+});
 
 $(document).ready(function(){
+    $kinginkbar=$("#king-ink-bar");
+    $peasinkbar=$("#peas-ink-bar");
     name = getParameterByName("name");
     console.log(name);
     if(name.length==0){
@@ -107,5 +144,8 @@ $(document).ready(function(){
     });
     $("#peasvote-button").click(function(){
         socket.emit("vote peas");
+    });
+    $("#sbutton").click(function(){
+        socket.emit("start game");
     });
 });

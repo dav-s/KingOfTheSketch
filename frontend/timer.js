@@ -31,6 +31,7 @@ Timer.prototype.tick = function(){
 Timer.prototype.updateTime = function(t){
     this.sTime= t.start;
     this.cTime= t.current;
+    this.duration = t.duration*1000;
     this.updateHTML();
 };
 
