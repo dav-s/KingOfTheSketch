@@ -1,4 +1,5 @@
 var socket = io('http://kingofthesketch.com:5000');
+//var socket = io('http://localhost:5000');
 
 
 function getParameterByName(name) {
@@ -17,7 +18,7 @@ var isKing = false;
 var isPeas = false;
 var kingvotes=0;
 var peasvotes=0;
-
+var userqueue = [];
 
 socket.on('connect', function () {
     console.log("dank");
@@ -41,6 +42,15 @@ socket.on("update ui", function(data){
 
 socket.on("need wait", function(time){
     setStatusBox("You need to wait "+(5-time/1000)+" seconds before voting again!","warning")
+});
+
+socket.on("update queue", function(queuelist){
+    userqueue=queuelist;
+    var html = '<tr><th>Position</th><th>Username</th></tr>';
+    for(var i = 0; i<userqueue.length; i++){
+        html+="<tr><td>"+(i+1)+"</td><td>"+userqueue[i]["name"]+"</td></tr>";
+    }
+    $("#queue-table").html(html);
 });
 
 

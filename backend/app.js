@@ -11,6 +11,8 @@ var kingid, peasid;
 var kingpic = [];
 var peaspic = [];
 
+var queuedusers = [];
+
 var starttime;
 var gamegoing=true;
 
@@ -32,6 +34,8 @@ io.on("connection", function(socket){
         if(geIDrFromName(name)==null){
             users[socket.id]= {name:name};
             socket.emit("name success");
+            queuedusers.push(socket.id);
+            updateQueue();
             if(gamegoing){
                 socket.emit("king update", kingpic);
                 socket.emit("peas update", peaspic);
@@ -47,6 +51,13 @@ io.on("connection", function(socket){
         if(users[socket.id]!=null){
             delete users[socket.id];
         }
+        for(var i = 0; i < queuedusers.length; i++){
+            if(queuedusers[i]==socket.id){
+                queuedusers.splice(i, 1);
+                break;
+            }
+        }
+        updateQueue();
     });
     socket.on("vote king", function(){
         if(gamegoing) {
@@ -119,3 +130,10 @@ function getGameState(){
     };
 }
 
+function updateQueue(){
+    var queue = [];
+    for(var i = 0; i<queuedusers.length; i++){
+        queue.push(users[queuedusers[i]]);
+    }
+    io.emit("update queue", queue);
+}
