@@ -144,14 +144,21 @@ $(document).ready(function(){
     $peasinkbar=$("#peas-ink-bar");
     name = getParameterByName("name");
     console.log(name);
-    if(name.length==0){
-        //window.location="index.html";
+    if(name.length==0 || name.length>50){
+
+        setStatusBox("Name is too long/short.","danger");
     }else{
+        name=name.replace(/&/g, '&amp;')
+            .replace(/>/g, '&gt;')
+            .replace(/</g, '&lt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&apos;');
         socket.emit("connect name", name);
         timer = new Timer($("#timer"), 0, function(){
             //socket.emit("end game");
         });
     }
+
     
 
     $("#kingvote-button").click(function(){
