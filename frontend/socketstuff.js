@@ -54,6 +54,7 @@ socket.on("update ui", function(data){
     $("#peasvote-count").html(data["peasvotes"]);
     kingvotes=data["kingvotes"];
     peasvotes=data["peasvotes"];
+    console.log(getRemainingInk("peas"));
     $kinginkbar.css("width", getRemainingInk("king")/maxink*100+"%");
     $peasinkbar.css("width", getRemainingInk("peas")/maxink*100+"%");
 });
@@ -139,7 +140,7 @@ $(document).ready(function(){
         //window.location="index.html";
     }else{
         socket.emit("connect name", name);
-        timer = new Timer($("#timer"), 5, function(){
+        timer = new Timer($("#timer"), 0, function(){
             socket.emit("end game");
         });
     }

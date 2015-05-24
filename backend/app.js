@@ -39,12 +39,14 @@ io.on("connection", function(socket){
             socket.emit("name success");
             queuedusers.push(socket.id);
             updateQueue();
-            updateTimer();
             if(gamegoing){
+                socket.emit("game start");
                 socket.emit("king update", kingpic);
                 socket.emit("peas update", peaspic);
+                io.emit("king ink", kingink);
+                io.emit("peas ink", peasink);
                 socket.emit("update ui", getGameState());
-                socket.emit("game start");
+                updateTimer();
             }
         }else{
             socket.emit("name taken");
@@ -176,7 +178,7 @@ function getGameState(){
     return {
         "peasvotes": peasvotes,
         "kingvotes": kingvotes,
-        "time": starttime,
+        "time": starttime
     };
 }
 
