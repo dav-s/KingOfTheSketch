@@ -3,13 +3,21 @@ var fs = require('fs');
 // id -> json
 
 var topicarray = fs.readFileSync(__dirname+"/todraw.txt").toString().split('\n');
-var leaderjson = JSON.parse(fs.readFileSync(__dirname+"/../frontend/leaderboard.json").toString());
+var leaderjson = [];
+if(fs.existsSync(__dirname+"/../frontend/mostleader.json")){
+    leaderjson= JSON.parse(fs.readFileSync(__dirname+"/../frontend/most.json").toString());
+}
+var longestleaderjson = [];
+if(fs.existsSync(__dirname+"/../frontend/longestleader.json")){
+    leaderjson= JSON.parse(fs.readFileSync(__dirname+"/../frontend/longestleader.json").toString());
+}
 //console.log(topicarray);
 var seconds_to_wait = 5;
 var seconds_duration = 90;
 
 var users = {};
-
+var last_winner = null;
+var amt_won=0;
 
 var kingvotes= 0, peasvotes= 0;
 var kingid, peasid;
@@ -146,13 +154,33 @@ io.on("connection", function(socket){
             }
             leaderjson.sort(function(a, b){
                 if(a.wins> b.wins){
-                    return 1;
-                }if(a.wins < b.wins){
                     return -1;
+                }if(a.wins < b.wins){
+                    return 1;
                 }
                 return 0;
             });
-            fs.writeFile(__dirname+"/../frontend/leaderboard.json", JSON.stringify(leaderjson), function(err){
+            fs.writeFile(__dirname+"/../frontend/mostleader.json", JSON.stringify(leaderjson), function(err){
+                console.log(err);
+            });
+            if(winname==last_winner){
+                amt_won++;
+                addToConsecBoardIfNotExist(last_winner, amt_won);
+            }else{
+                addToConsecBoardIfNotExist(last_winner, amt_won);
+                last_winner=winname;
+                amt_won=1;
+                addToConsecBoardIfNotExist(last_winner, amt_won);
+            }
+            leaderjson.sort(function(a, b){
+                if(a.wins> b.wins){
+                    return -1;
+                }if(a.wins < b.wins){
+                    return 1;
+                }
+                return 0;
+            });
+            fs.writeFile(__dirname+"/../frontend/longestleader.json", JSON.stringify(longestleaderjson), function(err){
                 console.log(err);
             });
             updateQueue();
@@ -219,4 +247,23 @@ function updateQueue(){
         queue.push(users[queuedusers[i]]);
     }
     io.emit("update queue", queue);
+}
+
+function addToConsecBoardIfNotExist(name, wins){
+    var madechange = false;
+    for(var i=0; i<longestleaderjson.length; i++){
+        if(name == longestleaderjson[i].name){
+            if(longestleaderjson[i].wins<wins){
+                longestleaderjson[i].wins=wins;
+            }
+            madechange=true;
+            break;
+        }
+    }
+    if(!madechange){
+        longestleaderjson.push({
+            "name":name,
+            "wins":wins
+        });
+    }
 }
