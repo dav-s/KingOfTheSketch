@@ -34,7 +34,7 @@ io.on("connection", function(socket){
             socket.emit("name success");
             if(gamegoing){
                 io.emit("king update", kingpic);
-                io.emit("peas update", kingpic);
+                io.emit("peas update", peaspic);
                 socket.emit("game start");
             }
         }else{
