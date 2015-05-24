@@ -22,6 +22,11 @@
 	display: inline-block;
 
 }
+#logo{
+	width: 200px;
+	margin-left: auto;
+	margin-right: auto;
+}
 #p2{
 	width: 400px;
 	height: 400px;
