@@ -6,7 +6,7 @@ var topicarray = fs.readFileSync(__dirname+"/todraw.txt").toString().split('\n')
 var leaderjson = JSON.parse(fs.readFileSync(__dirname+"/../frontend/leaderboard.json").toString());
 //console.log(topicarray);
 var seconds_to_wait = 5;
-var seconds_duration = 20;
+var seconds_duration = 90;
 
 var users = {};
 
