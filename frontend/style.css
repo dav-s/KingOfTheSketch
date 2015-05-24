@@ -1,5 +1,5 @@
 #player1-section{
-	width: 49vw;
+	width: 48vw;
 	margin: 0;
 	display: inline-block;
 	/*float: left;*/
@@ -15,7 +15,7 @@
 }
 #player2-section{
 
-	width: 49vw;
+	width: 48vw;
 	/*height: 400px;*/
 	/*float: right;*/
 	margin: 0;
@@ -129,4 +129,10 @@
 	border: none;
 	width: 10px;
 	height: 10px;
+}
+.credits{
+	position: fixed;
+	bottom: 0;
+	text-align: center;
+	width: 100%;
 }
