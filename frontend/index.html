@@ -5,97 +5,87 @@
     <title>King of The Sketch</title>
     <script src="http://code.jquery.com/jquery-2.1.4.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href = "style.css">
-	<script src="homeapp.js"></script>
-	<meta name="theme-color" content="#FF9900">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="homeapp.js"></script>
+    <meta name="theme-color" content="#FF9900">
 </head>
 <body>
 
 <div class="panel panel-warning">
-	<div id="welcome">
-		<img src="Dependencies/logo.png" height="50" width="100"/>
-		<h2>Welcome to King of the Sketch!</h2>
-  		<ul id="buttongr">
-  			<li id="b1">
-  				<button type="button" class="btn btn-warning">Play Now</button>
-  			</li>
-  			<li id="b2">
-  				<button type="button" class="btn btn-warning">How to play</button>
-  			</li>
-  			<li id="b3">
-  				<button type="button" class="btn btn-warning">Leaderborads</button>
-  			</li>
-  		</ul>
-  		<br>
-	</div>
+    <div id="welcome">
+        <img src="Dependencies/logo.png" height="50" width="100"/>
+
+        <h2>Welcome to King of the Sketch!</h2>
+        <ul id="buttongr">
+            <li id="b1">
+                <button type="button" class="btn btn-warning">Play Now</button>
+            </li>
+            <li id="b2">
+                <button type="button" class="btn btn-warning">How to play</button>
+            </li>
+            <li id="b3">
+                <button type="button" class="btn btn-warning">Leaderborads</button>
+            </li>
+        </ul>
+        <br>
+    </div>
 </div>
 
 <div id="play-now">
-	<form action="play.html">
-    	Name: <input type="text" name="name"/>
-		<input type="submit" value="Go!"/>
-	</form>
+    <form action="play.html">
+        Name: <input type="text" name="name"/>
+        <input type="submit" value="Go!"/>
+    </form>
 </div>
 <div id="how-to-play">
-	<div class="panel panel-default">
- 		 <div class="panel-body center">
-    		<h3>Welcome to a drawing version of King of the Hill!</h3>
- 		 </div>
- 		 <div class="panel-footer">
-	 		 <div id="how-to-play-desc">
-		 		<div class = "center">
-		 			<b><i> The Game is Simple:</i></b>
-		 		</div>
-		 		 <br>
-		 		 <div id="">
-		 		 	<ul>
-			 		 	<li>When you aren't the peasant or the King, you can vote on which sketcher has a better drawing depending on how similiar your drawing is to the theme!
-			 		 	</li>
-			 		 	<li>
-			 		 	When you are the peasant, be ready to draw great because it's your chance to beat the King!
-			 		 	</li>
-			 		 	<li>
-			 		 	Kings can't last forever! If the peasant gets more votes than the King, the peasant becomes the King!
-			 		 	</li>
-			 		 	<li>When you become the King, compete with the other sketchers to win as many games as possible!
-			 		 	</li>
-			 		 	<li>
-			 		 	Challenge your friends and beat each others scores.
-			 		 	</li>
-		 		 	</ul>
-		 		 </div>
-	 		 </div>
- 		 </div>
-	</div>
+    <div class="panel panel-default">
+        <div class="panel-body center">
+            <h3>Welcome to a drawing version of King of the Hill!</h3>
+        </div>
+        <div class="panel-footer">
+            <div id="how-to-play-desc">
+                <div class="center">
+                    <b><i> The Game is Simple:</i></b>
+                </div>
+                <br>
+
+                <div id="">
+                    <ul>
+                        <li>When you aren't the peasant or the King, you can vote on which sketcher has a better drawing
+                            depending on how similiar your drawing is to the theme!
+                        </li>
+                        <li>
+                            When you are the peasant, be ready to draw great because it's your chance to beat the King!
+                        </li>
+                        <li>
+                            Kings can't last forever! If the peasant gets more votes than the King, the peasant becomes
+                            the King!
+                        </li>
+                        <li>When you become the King, compete with the other sketchers to win as many games as possible!
+                        </li>
+                        <li>
+                            Challenge your friends and beat each others scores.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <div id="leaderboards">
-	<table class="table table-striped" id="leader-table">
-		<tr>
-  	<th>
-  		Place
-  	</th>
-  	<th>
-  		Name
-  	</th>
-		</tr>
-  	<tr>
-  		<td>
-  		1.
-  		</td>
-  		<td>
-  		Ryan Wells
-  		</td>
-  	</tr>
-  	<tr>
-  		<td>
-  			2.
-  		</td>
-  		<td>
-  			Davis Robertson
-  		</td>
-  	</tr>
-</table>
+    <table class="table table-striped" id="leader-table">
+        <tr>
+            <th>
+                Position
+            </th>
+            <th>
+                Name
+            </th>
+            <th>Wins</th>
+        </tr>
+        <tr>
+    </table>
 </div>
 </body>
 </html>
