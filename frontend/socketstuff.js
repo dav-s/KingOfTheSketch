@@ -16,6 +16,7 @@ function setStatusBox(message, type){
 var maxink=500;
 var voteinkweight = 25;
 
+var topic = "";
 var name = "";
 var kingvotes=0;
 var peasvotes=0;
@@ -117,8 +118,10 @@ socket.on("king ink", function(ink){
     $peasinkbar.css("width", getRemainingInk("peas")/maxink*100+"%");
 });
 
-socket.on("game start", function(){
+socket.on("game start", function(top){
     gamegoing=true;
+    topic=top;
+    $("#topic-box").html(topic);
     $("#sbutton").hide();
     timer.initiate();
     setStatusBox("Game started!", "success");

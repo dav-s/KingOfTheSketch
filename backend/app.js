@@ -1,6 +1,9 @@
 var io = require('socket.io')(5000);
+var fs = require('fs');
 // id -> json
 
+var topicarray = fs.readFileSync(__dirname+"/todraw.txt").toString().split('\n');
+console.log(topicarray);
 var seconds_to_wait = 5;
 var seconds_duration = 90;
 
@@ -13,6 +16,7 @@ var kingink= 0, peasink=0;
 
 var kingpic = [];
 var peaspic = [];
+var curtopic = "topic";
 
 var queuedusers = [];
 
@@ -40,7 +44,7 @@ io.on("connection", function(socket){
             queuedusers.push(socket.id);
             updateQueue();
             if(gamegoing){
-                socket.emit("game start");
+                socket.emit("game start", curtopic);
                 socket.emit("king update", kingpic);
                 socket.emit("peas update", peaspic);
                 io.emit("king ink", kingink);
@@ -100,7 +104,7 @@ io.on("connection", function(socket){
             io.emit("disable all");
             io.sockets.connected[queuedusers[0]].emit("enable king");
             io.sockets.connected[queuedusers[1]].emit("enable peas");
-            io.emit("game start");
+            io.emit("game start", curtopic);
             updateTimer();
             updateUI();
         }
