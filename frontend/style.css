@@ -1,8 +1,13 @@
 #player1-section{
-	width: 400px;
-	height: 400px;
-	float: left;
+	width: 50vw;
+	margin: 0;
+	display: inline-block;
+	/*float: left;*/
 
+}
+.center{
+	margin-left: auto;
+	margin-right: auto;
 }
 #p1{
 	width: 400px;
@@ -10,14 +15,17 @@
 }
 #player2-section{
 
-	width: 400px;
-	height: 400px;
-	float: right;
+	width: 50vw;
+	/*height: 400px;*/
+	/*float: right;*/
+	margin: 0;
+	display: inline-block;
 
 }
 #p2{
 	width: 400px;
 	height: 400px;
+
 }
 
 
