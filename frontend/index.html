@@ -6,14 +6,40 @@
     <script src="http://code.jquery.com/jquery-2.1.4.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href = "style.css">
+	<script src="homeapp.js"></script>
 </head>
 <body>
 
-<h1>Sign up!</h1>
+<div class="panel panel-warning">
+	<div id="welcome">
+		<img src="Dependencies/logo.png" height="50" width="100"/>
+		<h3>Welcome to King of the Sketch</h3>
+  		<ul id="buttongr">
+  			<li id="b1">
+  				<button type="button" class="btn btn-warning">Play Now</button>
+  			</li>
+  			<li id="b2">
+  				<button type="button" class="btn btn-warning">How to play</button>
+  			</li>
+  			<li id="b3">
+  				<button type="button" class="btn btn-warning">Leaderborads</button>
+  			</li>
+  		</ul>
+  		<br>
+	</div>
+</div>
 
-<form action="play.html">
-    Name: <input type="text" name="name"/>
-</form>
-
+<div id="play-now">
+	<form action="play.html">
+    	Name:<input type="text" name="name"/>
+	</form>
+</div>
+<div id="how-to-play">
+	How to play	: 
+</div>
+<div id="leaderboards">
+	Leaderboards:
+</div>
 </body>
 </html>

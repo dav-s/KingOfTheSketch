@@ -62,3 +62,26 @@
 	text-align: right;
 	padding-right: 15px;
 }
+#welcome{
+	text-align: center;
+	font-weight: 1000;
+}
+#buttongr{
+	list-style: none;
+	width: 500px;
+	margin-left: auto;
+	margin-right: auto; 	
+}
+#buttongr li{
+	float: left;
+	padding-left: 20px;
+}
+#play-now{
+	padding-top: 20px;
+	width: 250px;
+	margin-right: auto;
+	margin-left: auto;
+}
+.center{
+	text-align: center;
+}
