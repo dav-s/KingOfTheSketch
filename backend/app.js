@@ -96,6 +96,7 @@ io.on("connection", function(socket){
     socket.on("start game", function () {
         if(!gamegoing){
             gamegoing=true;
+            curtopic = topicarray[Math.floor(Math.random() * topicarray.length)];
             starttime=Date.now();
             kingvotes=0;
             peasvotes=0;
