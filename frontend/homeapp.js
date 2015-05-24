@@ -11,11 +11,11 @@ $(document).ready(function() {
     });
     $("#b3").click(function(){
     	hideTabs();
-    	$("#leaderboards").show();
+    	$("#leaderboard-section").show();
 		$.get("leaderboard.json", function(data){
 			var html = "<tr><th>Position</th><th>Name</th><th>Wins</th></tr>";
 			$.each(data, function(index, val){
-				html+="<tr><td>"+(index+1)+"</td><td>"+val.name+"</td><td>"+val.wins+"</td></tr>";
+				html+="<tr class ='success'><td>"+(index+1)+"</td><td>"+val.name+"</td><td>"+val.wins+"</td></tr>";
 			});
 			$("#leader-table").html(html);
 		});
@@ -27,7 +27,7 @@ $(document).ready(function() {
 function hideTabs(){
 	$("#play-now").hide();
 	$("#how-to-play").hide();
-	$("#leaderboards").hide();
+	$("#leaderboard-section").hide();
 }
 
 
