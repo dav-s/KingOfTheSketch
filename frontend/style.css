@@ -112,3 +112,14 @@
 	margin-right: auto;
 	width: 50%;
 }
+
+#toolbar{
+	width: 250px;
+	padding: 5px;
+}
+
+.swatch{
+	border: none;
+	width: 10px;
+	height: 10px;
+}

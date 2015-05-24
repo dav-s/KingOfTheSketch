@@ -14,6 +14,7 @@ function setStatusBox(message, type){
 }
 
 var maxink=500;
+var voteinkweight = 25;
 
 var name = "";
 var kingvotes=0;
@@ -29,7 +30,10 @@ var peascanv = null;
 var gamegoing=false;
 
 function getRemainingInk(type){
-    return maxink-(eval(type+"ink")-eval(type+"votes")*10);
+    if(gamegoing) {
+        return maxink - (eval(type + "ink") - eval(type + "votes") * voteinkweight);
+    }
+    return 0;
 }
 
 socket.on('connect', function () {
@@ -113,6 +117,7 @@ socket.on("king ink", function(ink){
 });
 
 socket.on("game start", function(){
+    gamegoing=true;
     $("#sbutton").hide();
     timer.initiate();
     setStatusBox("Game started!", "success");
@@ -121,7 +126,8 @@ socket.on("game start", function(){
 socket.on("game end", function(){
     $("#sbutton").show();
     timer.stop();
-    setStatusBox("The game has ended", "error");
+    gamegoing=false;
+    setStatusBox("The game has ended! "+userqueue[0].name+" is victorious!", "success");
 });
 
 $(document).ready(function(){

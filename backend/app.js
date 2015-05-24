@@ -106,14 +106,24 @@ io.on("connection", function(socket){
     socket.on("end game", function(){
         if(gamegoing){
             gamegoing=false;
-            if(peasvotes>kingvotes){
+            if(peasvotes>kingvotes){//peaswins
+                var tuser = queuedusers.shift();
+                queuedusers.push(tuser);
+            }else if(kingvotes>peasvotes){//king
+                var tuser = queuedusers[1];
+                queuedusers.splice(1,1);
+                queuedusers.push(tuser);
+            }else if(peasink<kingink){//peas
+                var tuser = queuedusers.shift();
+                queuedusers.push(tuser);
 
-            }else if(kingvotes>peasvotes){
-
-            }else if(peasink<kingink){
-
+            }else{//king
+                var tuser = queuedusers[1];
+                queuedusers.splice(1,1);
+                queuedusers.push(tuser);
             }
-            io.emit("end game", kingvotes);
+            updateQueue();
+            io.emit("game end");
         }
     });
 

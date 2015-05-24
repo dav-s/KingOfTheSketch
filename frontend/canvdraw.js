@@ -21,6 +21,12 @@ $(document).ready(function(){
             peascanv.update(lines);
         }
     });
+    $(".swatch").click(function(){
+        selcol=$(this).css("background-color");
+    });
+    $("#radius-slider").change(function(){
+        selradius=this.value;
+    });
 });
 
 function createCanvas(locationid, id){
@@ -83,6 +89,7 @@ function EditableCanvas(id, type){
         var mouseX = e.pageX - this.offsetLeft;
         var mouseY = e.pageY - this.offsetTop;
         paint = true;
+        lines.push(new Line());
         addClick(mouseX, mouseY);
         redraw();
     });
@@ -96,13 +103,11 @@ function EditableCanvas(id, type){
     });
     $canv.mouseup(function(e){
         paint = false;
-        lines.push(new Line());
-        linenum++;
+        linenum=lines.length;
     });
     $canv.mouseleave(function(e){
         paint = false;
-        lines.push(new Line());
-        linenum++;
+        linenum=lines.length;
     });
     function addClick(x, y)
     {
