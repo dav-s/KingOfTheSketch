@@ -114,6 +114,8 @@ io.on("connection", function(socket){
             io.emit("disable all");
             io.sockets.connected[queuedusers[0]].emit("enable king");
             io.sockets.connected[queuedusers[1]].emit("enable peas");
+            io.emit("king ink", kingink);
+            io.emit("peas ink", peas);
             io.emit("game start", curtopic);
             updateTimer();
             updateUI();
