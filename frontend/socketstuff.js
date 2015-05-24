@@ -19,6 +19,7 @@ var isPeas = false;
 var kingvotes=0;
 var peasvotes=0;
 var userqueue = [];
+var timer = null;
 
 socket.on('connect', function () {
     console.log("dank");
@@ -70,6 +71,7 @@ $(document).ready(function(){
         //window.location="index.html";
     }else{
         socket.emit("connect name", name);
+        timer = new Timer($("#timer"));
     }
     
 
