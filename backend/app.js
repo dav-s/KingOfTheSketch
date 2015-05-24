@@ -8,6 +8,9 @@ var users = {};
 var kingvotes= 0, peasvotes= 0;
 var kingid, peasid;
 
+var kingpic = {};
+var peaspic = {};
+
 var starttime;
 var gamegoing=false;
 
@@ -73,6 +76,10 @@ io.on("connection", function(socket){
             io.emit("game start");
             updateUI();
         }
+    });
+
+    socket.on("king draw", function(data){
+
     });
 
 });
