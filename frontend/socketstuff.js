@@ -15,6 +15,8 @@ function setStatusBox(message, type){
 var name = "";
 var isKing = false;
 var isPeas = false;
+var kingvotes=0;
+var peasvotes=0;
 
 
 socket.on('connect', function () {
@@ -33,6 +35,8 @@ socket.on("name success", function(){
 socket.on("update ui", function(data){
     $("#kingvote-count").html(data["kingvotes"]);
     $("#peasvote-count").html(data["peasvotes"]);
+    kingvotes=data["kingvotes"];
+    peasvotes=data["peasvotes"];
 });
 
 socket.on("need wait", function(time){
