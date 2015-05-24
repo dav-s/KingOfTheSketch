@@ -20,6 +20,8 @@ var kingvotes=0;
 var peasvotes=0;
 var userqueue = [];
 var timer = null;
+var kingcanv = null;
+var peascanv = null;
 
 socket.on('connect', function () {
     console.log("dank");
@@ -47,9 +49,32 @@ socket.on("need wait", function(time){
 
 socket.on("update queue", function(queuelist){
     userqueue=queuelist;
+    if(userqueue[0]["name"]==name && !isKing){
+        if(isPeas){
+            peascanv=new UneditableCanvas("peascanv");
+            createCanvas("p2", "peascanv");
+
+        }
+        createCanvas("p1", "kingcanv");
+
+        kingcanv = new EditableCanvas("kingcanv", "king");
+        isPeas=false;
+        isKing=true;
+    }if(userqueue[1]!=null && userqueue[1]["name"]==name && !isPeas){
+        if(isKing){
+            createCanvas("p1", "kingcanv");
+            peascanv=new UneditableCanvas("kingcanv");
+        }
+        createCanvas("p2", "peascanv");
+
+        kingcanv = new EditableCanvas("peascanv", "peas");
+        isPeas=true;
+        isKing=false;
+    }
     var html = '<tr><th>Position</th><th>Username</th></tr>';
     html += "<tr style='background-color: gold'><td>" + 1 + "</td><td>" + userqueue[0]["name"] + "</td></tr>";
-    html += "<tr style='background-color: lightcoral'><td>" + 2 + "</td><td>" + userqueue[1]["name"] + "</td></tr>";
+    html += "<tr style='background-color: lightcoral'><td>" + 2 + "</td><td>" +
+            (userqueue[1]==null ? "NONE" : userqueue[1]["name"]) + "</td></tr>";
 
     for(var i = 2; i<userqueue.length; i++){
         if(name==userqueue[i]["name"]){
@@ -71,7 +96,9 @@ $(document).ready(function(){
         //window.location="index.html";
     }else{
         socket.emit("connect name", name);
-        timer = new Timer($("#timer"));
+        timer = new Timer($("#timer"), 5, function(){
+            socket.emit("end game");
+        });
     }
     
 

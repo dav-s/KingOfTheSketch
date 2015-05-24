@@ -1,6 +1,8 @@
 
-function Timer($timer){
+function Timer($timer, seconds, callback){
     this.$timer = $timer;
+    this.duration=seconds*1000;
+    this.callback = callback || function(){};
     this.updateHTML();
 }
 
@@ -8,6 +10,7 @@ Timer.prototype.$timer = null;
 
 Timer.prototype.sTime = 0;
 Timer.prototype.cTime = 0;
+Timer.prototype.duration = 0;
 
 Timer.prototype.tickLength=50;
 
@@ -33,17 +36,18 @@ Timer.prototype.updateTime = function(t){
 
 Timer.prototype.initiate = function(){
     this.isRunning=true;
-    var that = this
+    var that = this;
     this.interval = setInterval(function(){
-        if(!that.isRunning){
-
+        if((that.sTime+that.duration)-that.cTime<0){
+            that.callback();
+            that.stop();
         }
         that.tick();
     },that.tickLength);
 };
 
 Timer.prototype.updateHTML = function(){
-    this.$timer.html(formatTime(this.cTime - this.sTime));
+    this.$timer.html(formatTime((this.sTime+this.duration)-this.cTime));
 };
 
 Timer.prototype.stop = function(){
@@ -56,12 +60,10 @@ function formatTime(time){
     time = Math.floor(time/1000);
     var s = time % 60;
     time = Math.floor(time/60);
-    var m = time % 60;
-    var h = Math.floor(time/60);
-    return "<h1 style='display: inline;'>"+pad2(h)+":</h1>" +
-        "<h2 style='display: inline;'>"+pad2(m)+":</h2>" +
-        "<h3 style='display: inline;'>"+pad2(s)+".</h3>" +
-        "<h4 style='display: inline;'>"+pad3(ms)+"</h4>";
+    var m = time;
+    return"<h1 style='display: inline;'>"+pad2(m)+":</h1>" +
+        "<h2 style='display: inline;'>"+pad2(s)+".</h2>" +
+        "<h3 style='display: inline;'>"+pad3(ms)+"</h3>";
 }
 
 function timeToJson(time){

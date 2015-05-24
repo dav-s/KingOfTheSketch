@@ -1,10 +1,15 @@
 /**
  * Created by davis on 5/23/15.
  */
-
+var selcol = "black", selradius = 5;
 $(document).ready(function(){
-    var kingcanv = new UneditableCanvas("kingcanv");
-    var peascanv = new UneditableCanvas("peascanv");
+    //var kingcanv = new UneditableCanvas("kingcanv");
+    createCanvas("p1", "kingcanv");
+    createCanvas("p2", "peascanv");
+    kingcanv = new UneditableCanvas("kingcanv");
+    peascanv = new UneditableCanvas("peascanv");
+    //EditableCanvas("kingcanv", "king");
+    //EditableCanvas("peascanv", "peas");
     socket.on("king update", function(lines){
         //console.log("whatt");
         if(kingcanv instanceof UneditableCanvas) {
@@ -18,11 +23,15 @@ $(document).ready(function(){
     });
 });
 
-function line(){
+function createCanvas(locationid, id){
+    $("#"+locationid).html("<canvas id='"+id+"' width='400px' height='400px' style='border: 2px solid black'></canvas>");
+}
+
+function Line(){
     this.xpoints = [];
     this.ypoints = [];
-    this.radius=4;
-    this.color="black";
+    this.radius=selradius;
+    this.color=selcol;
 }
 
 
@@ -68,7 +77,7 @@ function EditableCanvas(id, type){
     var canv = document.getElementById(id);
 
     var context = canv.getContext("2d");
-    var lines = [new line()];
+    var lines = [new Line()];
     $canv = $("#"+id);
     $canv.mousedown(function(e){
         var mouseX = e.pageX - this.offsetLeft;
@@ -87,12 +96,12 @@ function EditableCanvas(id, type){
     });
     $canv.mouseup(function(e){
         paint = false;
-        lines.push(new line());
+        lines.push(new Line());
         linenum++;
     });
     $canv.mouseleave(function(e){
         paint = false;
-        lines.push(new line());
+        lines.push(new Line());
         linenum++;
     });
     function addClick(x, y)
@@ -112,12 +121,3 @@ function EditableCanvas(id, type){
 
     }
 }
-
-
-
-socket.on("king update", function(pic){
-
-});
-socket.on("peas update", function(pic){
-
-});
