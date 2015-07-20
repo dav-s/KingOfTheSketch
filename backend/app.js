@@ -5,7 +5,7 @@ var fs = require('fs');
 var topicarray = fs.readFileSync(__dirname+"/todraw.txt").toString().split('\n');
 var leaderjson = [];
 if(fs.existsSync(__dirname+"/../frontend/mostleader.json")){
-    leaderjson= JSON.parse(fs.readFileSync(__dirname+"/../frontend/most.json").toString());
+    leaderjson= JSON.parse(fs.readFileSync(__dirname+"/../frontend/mostleader.json").toString());
 }
 var longestleaderjson = [];
 if(fs.existsSync(__dirname+"/../frontend/longestleader.json")){
